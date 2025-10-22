@@ -1,0 +1,60 @@
+[
+  {
+    "slug": "weatherly",
+    "title": "Weatherly",
+    "summary": "A simple weather dashboard that shows current conditions and a 5\u2011day forecast.",
+    "tech": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "API"
+    ],
+    "images": [
+      "assets/images/weatherly_1.svg",
+      "assets/images/weatherly_2.svg",
+      "assets/images/weatherly_3.svg"
+    ],
+    "description": [
+      "Weatherly is a learning project focused on working with public APIs and rendering clean UI.",
+      "It demonstrates asynchronous JavaScript (fetch), basic error handling, and responsive design patterns."
+    ]
+  },
+  {
+    "slug": "tasklite",
+    "title": "TaskLite",
+    "summary": "A no\u2011frills to\u2011do list with localStorage persistence and keyboard shortcuts.",
+    "tech": [
+      "HTML",
+      "CSS",
+      "JavaScript"
+    ],
+    "images": [
+      "assets/images/tasklite_1.svg",
+      "assets/images/tasklite_2.svg",
+      "assets/images/tasklite_3.svg"
+    ],
+    "description": [
+      "TaskLite emphasizes DOM manipulation, data modeling, and accessibility (labels, focus states).",
+      "It stores data locally so the app works offline and includes basic keyboard navigation."
+    ]
+  },
+  {
+    "slug": "recipe-finder",
+    "title": "Recipe Finder",
+    "summary": "Search recipes by ingredient and bookmark favorites for later.",
+    "tech": [
+      "HTML",
+      "CSS",
+      "JavaScript"
+    ],
+    "images": [
+      "assets/images/recipe_1.svg",
+      "assets/images/recipe_2.svg",
+      "assets/images/recipe_3.svg"
+    ],
+    "description": [
+      "Recipe Finder is a practice app that filters, searches, and presents a card-based grid of results.",
+      "Focus is on component-like structure with vanilla JS and a clean, responsive layout."
+    ]
+  }
+]

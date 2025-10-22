@@ -1,0 +1,263 @@
+/* ===========
+   Root + Reset
+   =========== */
+*,
+*::before,
+*::after { box-sizing: border-box; } /* Include borders/padding in element widths. */
+
+html { scroll-behavior: smooth; } /* Smooth in-page anchor scrolling. */
+
+:root {
+  --bg: #0f1115;            /* Base page background (dark-friendly). */
+  --bg-elev: #151924;       /* Elevated surfaces (cards/header). */
+  --text: #e6e9ef;          /* Primary text color. */
+  --muted: #a5adbe;         /* Secondary/tertiary text. */
+  --accent: #7c9aff;        /* Accent blue for highlights. */
+  --accent-contrast: #0b1020; /* Contrast color against accent for focus rings. */
+  --border: #293042;        /* Subtle border color. */
+
+  --container: 1100px;      /* Max readable width for content. */
+  --radius: 14px;           /* Default rounded corners. */
+  --radius-lg: 24px;        /* Larger rounding for hero image/cards. */
+
+  --space-1: .25rem;        /* Spacing scale (4px). */
+  --space-2: .5rem;         /* 8px. */
+  --space-3: .75rem;        /* 12px. */
+  --space-4: 1rem;          /* 16px. */
+  --space-5: 1.5rem;        /* 24px. */
+  --space-6: 2rem;          /* 32px. */
+  --space-7: 3rem;          /* 48px. */
+  --space-8: 4rem;          /* 64px. */
+}
+
+/* Prefer light theme if user prefers it. */
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg: #f7f8fb;          /* Light background. */
+    --bg-elev: #ffffff;     /* White cards/header. */
+    --text: #121418;        /* Darker text. */
+    --muted: #5a6477;       /* Muted text in light mode. */
+    --accent: #3957ff;      /* Slightly deeper accent in light. */
+    --border: #e6e8ee;      /* Light borders. */
+    --accent-contrast: #ffffff; /* Contrast for focus ring. */
+  }
+}
+
+/* =====
+   Base
+   ===== */
+body {
+  margin: 0;                                             /* Remove default margin. */
+  font-family: ui-sans-serif, system-ui, -apple-system,  /* System stack for speed. */
+               Segoe UI, Roboto, Helvetica, Arial,       /* Cross-platform fallbacks. */
+               "Apple Color Emoji","Segoe UI Emoji";
+  color: var(--text);                                    /* Use theme text color. */
+  background: radial-gradient(1200px 600px at 10% 0%,    /* Subtle background vignette. */
+              rgba(124,154,255,.08), transparent 60%),
+              var(--bg);
+  line-height: 1.5;                                      /* Comfortable reading. */
+  -webkit-font-smoothing: antialiased;                   /* Crisp text on Mac. */
+  -moz-osx-font-smoothing: grayscale;                    /* Crisp text on Mac. */
+}
+
+img { max-width: 100%; height: auto; display: block; }   /* Responsive, no overflow. */
+
+a { color: inherit; text-decoration: none; }             /* Let buttons/links control styles. */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--accent);                      /* High-contrast keyboard focus. */
+  outline-offset: 3px;
+}
+
+/* =========
+   Utilities
+   ========= */
+.container {
+  width: min(100% - 2rem, var(--container));             /* Side padding + max width. */
+  margin-inline: auto;                                   /* Center container. */
+}
+
+.muted { color: var(--muted); }                          /* Secondary text color. */
+.small { font-size: .875rem; }                           /* Small helper text. */
+.accent { color: var(--accent); }                        /* Accent-colored text. */
+
+/* ==========
+   Site Header
+   ========== */
+.site-header {
+  position: sticky; top: 0; z-index: 50;                 /* Stick to top on scroll. */
+  background: color-mix(in srgb, var(--bg-elev) 86%, transparent); /* Semi-opaque. */
+  backdrop-filter: saturate(1.2) blur(10px);             /* Glassy blur effect. */
+  border-bottom: 1px solid var(--border);                /* Subtle divider line. */
+}
+
+.nav {
+  display: flex; align-items: center; justify-content: space-between; /* Horizontal layout. */
+  min-height: 64px;                                       /* Comfortable hit area. */
+}
+
+.brand {
+  font-weight: 700; letter-spacing: .3px;                 /* Stronger brand type. */
+}
+
+.nav-list {
+  display: flex; gap: var(--space-5);                     /* Even spacing between links. */
+  list-style: none; margin: 0; padding: 0;                /* Reset list defaults. */
+}
+
+.nav-link {
+  display: inline-block; padding: .5rem .25rem;           /* Clickable area. */
+  position: relative;                                     /* For underline effect. */
+}
+.nav-link::after {
+  content: ""; position: absolute; inset-inline: 0;       /* Animated underline. */
+  bottom: -6px; height: 2px; background: var(--accent);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform .25s ease;
+}
+.nav-link:hover::after,
+.nav-link:focus-visible::after { transform: scaleX(1); }  /* Show underline on hover/focus. */
+
+/* =====
+   Hero
+   ===== */
+.hero { padding-block: var(--space-8); }                  /* Top/bottom spacing. */
+
+.hero-grid {
+  display: grid;                                          /* Two-column layout. */
+  grid-template-columns: 360px 1fr;                       /* Photo + copy. */
+  gap: var(--space-7); align-items: center;               /* Space + vertical align. */
+}
+
+.hero-photo img {
+  border-radius: 50%;                                     /* Circular avatar. */
+  border: 1px solid var(--border);                        /* Subtle ring. */
+  box-shadow: 0 20px 40px rgba(0,0,0,.25);                /* Depth shadow. */
+  object-fit: cover;                                      /* Crop to circle nicely. */
+}
+
+.hero-copy h1 { margin: 0 0 var(--space-4); font-size: clamp(1.8rem, 4vw, 2.6rem); } /* Responsive title. */
+.hero-copy p  { margin: 0 0 var(--space-5); color: var(--muted); }                   /* Supporting text. */
+
+.hero-actions { display: flex; gap: var(--space-4); flex-wrap: wrap; }               /* Button row. */
+
+/* ======
+   Buttons
+   ====== */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; /* Center text. */
+  gap: .5rem; padding: .8rem 1.1rem; border-radius: var(--radius);    /* Shape + spacing. */
+  background: var(--accent); color: var(--accent-contrast);           /* Primary style. */
+  border: 1px solid color-mix(in srgb, var(--accent) 60%, black 20%); /* Define edges. */
+  box-shadow: 0 10px 24px rgba(0,0,0,.25);                            /* Subtle lift. */
+  font-weight: 600; letter-spacing: .2px;                             /* Legible. */
+  transition: transform .06s ease, box-shadow .2s ease, opacity .2s;  /* Interactions. */
+}
+.btn:hover { transform: translateY(-1px); box-shadow: 0 14px 28px rgba(0,0,0,.28); } /* Hover raise. */
+.btn:active { transform: translateY(0); box-shadow: 0 8px 20px rgba(0,0,0,.2); }     /* Pressed feel. */
+
+.btn.btn-secondary {
+  background: transparent; color: var(--text);                         /* Ghost style. */
+  border: 1px solid var(--border);                                     /* Outline. */
+  box-shadow: none;                                                    /* Flat. */
+}
+
+/* =========
+   Projects
+   ========= */
+.projects-section { padding-block: var(--space-8); }                   /* Section spacing. */
+.projects-section h2 { margin: 0 0 var(--space-2); font-size: 1.75rem; }  /* Heading. */
+.projects-section .muted { margin-bottom: var(--space-6); }            /* Subheading gap. */
+
+.grid {
+  display: grid; gap: var(--space-5);                                  /* Card grid. */
+  grid-template-columns: repeat(12, 1fr);                              /* 12-col grid. */
+}
+
+#project-grid > * { grid-column: span 4; }                              /* 3-up at desktop. */
+
+@media (max-width: 900px) {
+  .hero-grid { grid-template-columns: 1fr; }                            /* Stack hero. */
+  #project-grid > * { grid-column: span 6; }                            /* 2-up on tablet. */
+}
+@media (max-width: 560px) {
+  #project-grid > * { grid-column: 1 / -1; }                            /* 1-up on mobile. */
+}
+
+.card {
+  background: var(--bg-elev);                                          /* Elevated surface. */
+  border: 1px solid var(--border);                                     /* Card outline. */
+  border-radius: var(--radius-lg);                                     /* Softer corners. */
+  overflow: hidden;                                                    /* Clip child edges. */
+  transition: transform .18s ease, box-shadow .18s ease;               /* Hover effects. */
+  cursor: pointer;                                                     /* Clickable affordance. */
+}
+.card:hover,
+.card:focus-within {
+  transform: translateY(-4px);                                         /* Lift on hover/focus. */
+  box-shadow: 0 24px 50px rgba(0,0,0,.25);                             /* Deeper shadow. */
+}
+
+.card-cover {
+  aspect-ratio: 16 / 9;                                                /* Consistent media height. */
+  background: linear-gradient(135deg, rgba(124,154,255,.2), transparent); /* Placeholder bg. */
+}
+
+.card-body { padding: var(--space-5); }                                 /* Inner spacing. */
+.card-title { margin: 0 0 .25rem; font-weight: 700; }                   /* Strong title. */
+.card-desc  { margin: 0 0 .75rem; color: var(--muted); }                /* Preview text. */
+.card-tags { display: flex; flex-wrap: wrap; gap: .5rem; }              /* Tag row. */
+.tag {
+  font-size: .75rem; padding: .25rem .5rem;                             /* Small pill. */
+  border-radius: 999px; border: 1px solid var(--border);                /* Outline pill. */
+  color: var(--muted); background: color-mix(in srgb, var(--bg-elev) 70%, var(--border) 30%); /* Subtle fill. */
+}
+
+/* =======
+   Contact
+   ======= */
+.contact-section { padding-block: var(--space-8); }                     /* Section spacing. */
+.contact-section h2 { margin: 0 0 var(--space-5); font-size: 1.75rem; }/* Heading spacing. */
+
+#contact-form { display: grid; gap: var(--space-4); max-width: 720px; }/* Vertical form layout. */
+
+.form-row { display: grid; gap: .5rem; }                                /* Label over input. */
+label { font-weight: 600; }                                             /* Emphasize labels. */
+input, textarea {
+  width: 100%; padding: .9rem 1rem;                                     /* Comfortable fields. */
+  border-radius: var(--radius); border: 1px solid var(--border);        /* Shape + outline. */
+  background: var(--bg-elev); color: var(--text);                       /* Contrast. */
+}
+input::placeholder, textarea::placeholder { color: color-mix(in srgb, var(--muted) 70%, var(--text) 30%); } /* Softer placeholder. */
+
+input:focus-visible, textarea:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--accent) 55%, transparent);/* Wide focus ring. */
+  outline-offset: 0; box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 20%, transparent); /* Halo. */
+}
+
+/* ======
+   Footer
+   ====== */
+.site-footer {
+  margin-top: var(--space-8);                                          /* Space away from content. */
+  border-top: 1px solid var(--border);                                 /* Divider line. */
+  background: color-mix(in srgb, var(--bg-elev) 90%, transparent);     /* Subtle tint. */
+}
+.site-footer .container {
+  display: flex; align-items: center; justify-content: center;         /* Center copyright. */
+  min-height: 72px;                                                    /* Breathing room. */
+}
+.site-footer p { margin: 0; color: var(--muted); }                     /* Reset + muted text. */
+
+
+.project-gallery > * { grid-column: span 4; }        /* Desktop: 3-up (each spans 4 of 12 columns). */
+
+@media (max-width: 900px){
+  .project-gallery > * { grid-column: span 6; }      /* Tablet: 2-up (each spans 6 of 12). */
+}
+
+@media (max-width: 560px){
+  .project-gallery > * { grid-column: 1 / -1; }      /* Mobile: 1-up (each spans full width). */
+}

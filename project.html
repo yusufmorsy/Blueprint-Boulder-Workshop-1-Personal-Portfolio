@@ -1,0 +1,62 @@
+<!DOCTYPE html> <!-- HTML5 doctype ensures standards mode rendering. -->
+<html lang="en"> <!-- Root element with language hint for accessibility/SEO. -->
+<head> <!-- Head: metadata, title, and external resources (not page content). -->
+  <meta charset="UTF-8" /> <!-- Use UTF-8 so all characters/symbols render correctly. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!-- Responsive layout: 1 CSS px ≈ device px width. -->
+  <meta name="description" content="Project details" /> <!-- Short page summary used by search engines/link previews. -->
+  <title>Project • My Portfolio</title> <!-- Browser tab title and default bookmark name. -->
+  <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml"> <!-- Tab/shortcut icon; SVG scales cleanly. -->
+  <link rel="stylesheet" href="styles.css" /> <!-- Shared stylesheet for consistent site-wide styles. -->
+</head>
+
+  <!-- Minimal header with a back/home link --> <!-- Developer note: describes intent of the header. -->
+  <header class="site-header"> <!-- Semantic site header; styled sticky in styles.css. -->
+    <div class="container nav"> <!-- Width-constrained flex row for brand + nav. -->
+      <a href="index.html#projects" class="brand">← Back</a> <!-- Brand area used as a back link to Projects grid. -->
+      <nav aria-label="Main"> <!-- Primary navigation landmark for assistive tech. -->
+        <ul class="nav-list"> <!-- List structure for navigation links (best practice). -->
+          <li><a href="index.html#home" class="nav-link">Home</a></li> <!-- Jump back to Home section on index.html. -->
+          <li><a href="index.html#contact" class="nav-link">Contact</a></li> <!-- Jump back to Contact section on index.html. -->
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="project-main"> <!-- Main landmark for page content; class hook for page-specific styles if needed. -->
+    <section class="container"> <!-- Centers content and limits max width to improve readability. -->
+      <article id="project-article"> <!-- Article wrapper for a single project's content. -->
+        <!-- JS populates this from projects.json using ?id=slug --> <!-- Note explaining data source and routing. -->
+        <h1 id="project-title" class="project-title">Loading…</h1> <!-- Project title placeholder; JS replaces text. -->
+        <p id="project-summary" class="muted">Please wait while we load the project.</p> <!-- One-line summary placeholder; muted style. -->
+
+        <div id="project-meta" class="project-meta">
+          <!-- Tags/tech get inserted here --> <!-- JS injects pills like stack/tags here. -->
+        </div>
+
+        <div id="project-body" class="project-body">
+          <!-- Long description injected here --> <!-- JS injects rich text/paragraphs/links. -->
+        </div>
+
+        <div id="project-gallery" class="project-gallery grid">
+          <!-- Images injected as clickable thumbnails --> <!-- JS adds thumb images; CSS grid lays them out. -->
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer class="site-footer"> <!-- Global footer; consistent with index.html. -->
+    <div class="container"> <!-- Align footer content with page gutters/max width. -->
+      <p>&copy; <span id="year"></span> Your Name. All rights reserved.</p> <!-- © notice; year is filled by script.js. -->
+    </div>
+  </footer>
+
+  <script>
+    // Utility: get query parameter (?id=...)
+    function getParam(name) {                                  // Small helper to read URL query params.
+      const url = new URL(window.location.href);               // Parse the current URL.
+      return url.searchParams.get(name);                       // Return the value for `name` or null.
+    }
+  </script>
+  <script src="script.js"></script> <!-- Shared JS: sets year, loads projects, and (on this page) should read ?id to render details. -->
+</body>
+</html> <!-- End of document. -->

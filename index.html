@@ -1,0 +1,117 @@
+<!DOCTYPE html> <!-- Tell the browser: HTML5 document, use standards mode (prevents quirks). -->
+<html lang="en"> <!-- Root element; lang helps screen readers and search/SEO. -->
+<head> <!-- Document metadata (not visible page content). -->
+  <meta charset="UTF-8" /> <!-- Character encoding so all symbols render correctly. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!-- Responsive layout: 1 CSS pixel per device pixel width, no default zoom. -->
+  <meta name="description" content="Personal portfolio workshop starter" /> <!-- Short page summary for SEO and link previews. -->
+  <title>My Portfolio</title> <!-- Browser tab title and search result title. -->
+  <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml"> <!-- Site icon shown in tabs/shortcuts; SVG scales cleanly. -->
+  <link rel="stylesheet" href="styles.css" /> <!-- External stylesheet with all your styles. -->
+</head>
+
+ <!--
+    =========================================
+    NAVIGATION BAR
+    - Contains logo/brand on the left and two links:
+      Home (#home) and Contact (#contact).
+    - Sticks to the top on scroll.
+    =========================================
+  --> <!-- Big section comment just for developers; no effect on rendering. -->
+  <header class="site-header"> <!-- Semantic header/landmark; styled as the sticky top bar via .site-header in CSS. SITES ANCHOR-->
+    <div class="container nav"> <!-- Layout wrapper to constrain width and apply nav-specific flex/grid styles. -->
+      <a href="#home" class="brand">Yusuf Morsy</a> <!-- Brand/logo link that jumps to the top (the #home anchor). -->
+      <nav aria-label="Main"> <!-- Primary navigation landmark; aria-label helps assistive tech. -->
+        <ul class="nav-list"> <!-- Navigation list (ul > li > a) is best-practice for menus. -->
+          <li><a href="#home" class="nav-link">Home</a></li> <!-- In-page anchor link to the Home/hero section. -->
+          <li><a href="#contact" class="nav-link">Contact</a></li> <!-- In-page anchor link to Contact section. -->
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="home"> <!-- Main content landmark; id="home" provides the anchor target for the Home link. -->
+    <!--
+      =========================================
+      HERO / ABOUT SECTION
+      - Space for a profile picture
+      - Short biography
+      - Downloadable resume preview (resume.pdf in assets/)
+      =========================================
+    --> <!-- Developer note: describes the hero’s purpose and assets. -->
+    <section class="hero"> <!-- Semantic section for the hero/introduction; styled via .hero. -->
+      <div class="container hero-grid"> <!-- Width-constraining wrapper; likely uses grid/flex for two-column layout. -->
+        <div class="hero-photo"> <!-- Column reserved for the profile image. -->
+          <!-- Replace avatar.svg with your own photo (PNG/JPG/SVG) --> <!-- Instructional comment to customize the asset. -->
+          <img src="assets/images/avatar.svg" alt="Portrait of Your Name" width="320" height="320" /> <!-- Image with alt text (accessibility), explicit width/height to prevent layout shift. -->
+        </div>
+        <div class="hero-copy"> <!-- Column with heading, bio text, and actions. -->
+          <h1>Hello, I'm <span class="accent">Your Name</span> 👋</h1> <!-- Primary page heading; span allows accent color styling. -->
+          <p>
+            I'm an aspiring web developer with a passion for building clean, accessible, and
+            responsive websites. This portfolio showcases a few projects and a bit about me.
+            Below you'll also find a link to download my resume.
+          </p> <!-- Intro paragraph; line breaks in source are collapsed in HTML. -->
+          <div class="hero-actions"> <!-- Button row container. -->
+            <!-- The download attribute suggests the browser should download instead of open --> <!-- Note: some browsers still open if they choose; filename may be inferred. -->
+            <a class="btn" href="assets/resume.pdf" download>Download Resume (PDF)</a> <!-- CTA button linking to your PDF; download attribute prompts saving. -->
+            <a class="btn btn-secondary" href="#projects">See Projects</a> <!-- Secondary CTA that scrolls to Projects. -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!--
+      =========================================
+      PROJECTS SECTION
+      - Cards are injected by JavaScript from projects.json
+      - Clicking a card navigates to project.html?id=<slug>
+      =========================================
+      DYNAMIC
+    --> <!-- Developer note: indicates data-driven rendering via script.js. -->
+    <section id="projects" class="projects-section"> <!-- Section with anchor id for deep-linking; styled as projects grid. -->
+      <div class="container"> <!-- Centers content and limits max width. -->
+        <h2>Projects</h2> <!-- Section heading (h2 since h1 is used in hero). -->
+        <p class="muted">Click a project to read more.</p> <!-- Supporting text; .muted likely dims color. -->
+        <div id="project-grid" class="grid"></div> <!-- Empty mount point; JS populates with project cards. -->
+      </div>
+    </section>
+
+    <!--
+      =========================================
+      CONTACT SECTION
+      - Simple, non-backend "mailto:" demo form
+      - Replace "me@example.com" with your email
+      =========================================
+    --> <!-- Developer note: this form is a front-end demo; production would use an API/backend. -->
+    <section id="contact" class="contact-section"> <!-- Section with anchor id for Contact; styled via .contact-section. -->
+      <div class="container"> <!-- Consistent layout wrapper. -->
+        <h2>Contact Me</h2> <!-- Contact section heading. -->
+        <form id="contact-form"> <!-- Form element; handled by script.js (likely prevents default and builds a mailto). -->
+          <div class="form-row"> <!-- One field row (label + input). -->
+            <label for="name">Name</label> <!-- Associates label with input#name for accessibility and click focus. -->
+            <input id="name" name="name" type="text" placeholder="Your Name" required /> <!-- Text input; required enables built-in validation. -->
+          </div>
+          <div class="form-row"> <!-- Second field row. -->
+            <label for="email">Email</label> <!-- Label for email field. -->
+            <input id="email" name="email" type="email" placeholder="you@example.com" required /> <!-- Email input triggers email-specific validation/UI. -->
+          </div>
+          <div class="form-row"> <!-- Third field row for message body. -->
+            <label for="message">Message</label> <!-- Label for textarea. -->
+            <textarea id="message" name="message" rows="5" placeholder="How can I help?" required></textarea> <!-- Multiline input; rows affects visible height. -->
+          </div>
+          <button class="btn" type="submit">Send</button> <!-- Submit control; styled as primary button. -->
+          <p class="muted small">This demo uses <code>mailto:</code> and your email client. In production, send via an API.</p> <!-- Disclosure so users know what happens on submit. -->
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer"> <!-- Semantic footer/landmark; global site info. -->
+    <div class="container"> <!-- Keeps footer content aligned with the rest of the page. -->
+      <p>&copy; <span id="year"></span> Your Name. All rights reserved.</p> <!-- © notice; #year is filled by JS to stay current automatically. -->
+    </div>
+  </footer>
+
+  <script src="script.js"></script> <!-- Loads your JavaScript at the end to avoid blocking initial render. -->
+</body>
+</html> <!-- End of document. -->
